@@ -1,0 +1,361 @@
+/* PresentCode - 30+ Keyframe Animations & 15+ Slide Transitions */
+
+/* =========================================================
+   ELEMENT ANIMATIONS (Entrance, Emphasis, Exit) - 30+ Total
+   ========================================================= */
+
+/* 1. Fade In */
+@keyframes animFadeIn { from { opacity: 0; } to { opacity: 1; } }
+.anim-fade-in { animation: animFadeIn 0.8s ease forwards; }
+
+/* 2. Fade In Up */
+@keyframes animFadeInUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
+.anim-fade-in-up { animation: animFadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+/* 3. Fade In Down */
+@keyframes animFadeInDown { from { opacity: 0; transform: translateY(-50px); } to { opacity: 1; transform: translateY(0); } }
+.anim-fade-in-down { animation: animFadeInDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+/* 4. Fade In Left */
+@keyframes animFadeInLeft { from { opacity: 0; transform: translateX(-60px); } to { opacity: 1; transform: translateX(0); } }
+.anim-fade-in-left { animation: animFadeInLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+/* 5. Fade In Right */
+@keyframes animFadeInRight { from { opacity: 0; transform: translateX(60px); } to { opacity: 1; transform: translateX(0); } }
+.anim-fade-in-right { animation: animFadeInRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+/* 6. Zoom In */
+@keyframes animZoomIn { from { opacity: 0; transform: scale(0.3); } to { opacity: 1; transform: scale(1); } }
+.anim-zoom-in { animation: animZoomIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+
+/* 7. Zoom In Up */
+@keyframes animZoomInUp { from { opacity: 0; transform: scale(0.4) translateY(100px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+.anim-zoom-in-up { animation: animZoomInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+/* 8. Zoom In Down */
+@keyframes animZoomInDown { from { opacity: 0; transform: scale(0.4) translateY(-100px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+.anim-zoom-in-down { animation: animZoomInDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+/* 9. Bounce In */
+@keyframes animBounceIn {
+  0% { opacity: 0; transform: scale(0.3); }
+  50% { opacity: 1; transform: scale(1.08); }
+  70% { transform: scale(0.92); }
+  100% { transform: scale(1); }
+}
+.anim-bounce-in { animation: animBounceIn 0.85s cubic-bezier(0.215, 0.61, 0.355, 1) forwards; }
+
+/* 10. Bounce In Up */
+@keyframes animBounceInUp {
+  0% { opacity: 0; transform: translateY(200px); }
+  60% { opacity: 1; transform: translateY(-20px); }
+  80% { transform: translateY(10px); }
+  100% { transform: translateY(0); }
+}
+.anim-bounce-in-up { animation: animBounceInUp 0.9s cubic-bezier(0.215, 0.61, 0.355, 1) forwards; }
+
+/* 11. Bounce In Down */
+@keyframes animBounceInDown {
+  0% { opacity: 0; transform: translateY(-200px); }
+  60% { opacity: 1; transform: translateY(20px); }
+  80% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+}
+.anim-bounce-in-down { animation: animBounceInDown 0.9s cubic-bezier(0.215, 0.61, 0.355, 1) forwards; }
+
+/* 12. Flip In X */
+@keyframes animFlipInX {
+  from { transform: perspective(400px) rotate3d(1, 0, 0, 90deg); opacity: 0; }
+  40% { transform: perspective(400px) rotate3d(1, 0, 0, -20deg); }
+  60% { transform: perspective(400px) rotate3d(1, 0, 0, 10deg); opacity: 1; }
+  80% { transform: perspective(400px) rotate3d(1, 0, 0, -5deg); }
+  to { transform: perspective(400px); }
+}
+.anim-flip-in-x { animation: animFlipInX 0.85s ease-in forwards; backface-visibility: visible !important; }
+
+/* 13. Flip In Y */
+@keyframes animFlipInY {
+  from { transform: perspective(400px) rotate3d(0, 1, 0, 90deg); opacity: 0; }
+  40% { transform: perspective(400px) rotate3d(0, 1, 0, -20deg); }
+  60% { transform: perspective(400px) rotate3d(0, 1, 0, 10deg); opacity: 1; }
+  80% { transform: perspective(400px) rotate3d(0, 1, 0, -5deg); }
+  to { transform: perspective(400px); }
+}
+.anim-flip-in-y { animation: animFlipInY 0.85s ease-in forwards; backface-visibility: visible !important; }
+
+/* 14. Rotate In */
+@keyframes animRotateIn {
+  from { transform: rotate(-200deg); opacity: 0; }
+  to { transform: rotate(0); opacity: 1; }
+}
+.anim-rotate-in { animation: animRotateIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+/* 15. Roll In */
+@keyframes animRollIn {
+  from { opacity: 0; transform: translateX(-100%) rotate(-120deg); }
+  to { opacity: 1; transform: translateX(0) rotate(0); }
+}
+.anim-roll-in { animation: animRollIn 0.85s ease forwards; }
+
+/* 16. Light Speed In */
+@keyframes animLightSpeedIn {
+  from { transform: translateX(100%) skewX(-30deg); opacity: 0; }
+  60% { transform: skewX(20deg); opacity: 1; }
+  80% { transform: skewX(-5deg); }
+  to { transform: translateX(0); }
+}
+.anim-light-speed { animation: animLightSpeedIn 0.8s ease-out forwards; }
+
+/* 17. Pulse (Emphasis) */
+@keyframes animPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.12); }
+  100% { transform: scale(1); }
+}
+.anim-pulse { animation: animPulse 1s ease-in-out infinite; }
+
+/* 18. Heartbeat (Emphasis) */
+@keyframes animHeartbeat {
+  0% { transform: scale(1); }
+  14% { transform: scale(1.2); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.2); }
+  70% { transform: scale(1); }
+}
+.anim-heartbeat { animation: animHeartbeat 1.3s ease-in-out infinite; }
+
+/* 19. Shake (Emphasis) */
+@keyframes animShake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+  20%, 40%, 60%, 80% { transform: translateX(10px); }
+}
+.anim-shake { animation: animShake 0.8s ease; }
+
+/* 20. Swing (Emphasis) */
+@keyframes animSwing {
+  20% { transform: rotate3d(0, 0, 1, 15deg); }
+  40% { transform: rotate3d(0, 0, 1, -10deg); }
+  60% { transform: rotate3d(0, 0, 1, 5deg); }
+  80% { transform: rotate3d(0, 0, 1, -5deg); }
+  to { transform: rotate3d(0, 0, 1, 0deg); }
+}
+.anim-swing { transform-origin: top center; animation: animSwing 1s ease; }
+
+/* 21. Tada (Emphasis) */
+@keyframes animTada {
+  from { transform: scale3d(1, 1, 1); }
+  10%, 20% { transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, -3deg); }
+  30%, 50%, 70%, 90% { transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg); }
+  40%, 60%, 80% { transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg); }
+  to { transform: scale3d(1, 1, 1); }
+}
+.anim-tada { animation: animTada 1s ease; }
+
+/* 22. Wobble (Emphasis) */
+@keyframes animWobble {
+  from { transform: translate3d(0, 0, 0); }
+  15% { transform: translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg); }
+  30% { transform: translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg); }
+  45% { transform: translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg); }
+  60% { transform: translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg); }
+  75% { transform: translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg); }
+  to { transform: translate3d(0, 0, 0); }
+}
+.anim-wobble { animation: animWobble 1s ease; }
+
+/* 23. Jello (Emphasis) */
+@keyframes animJello {
+  from, 11.1%, to { transform: translate3d(0, 0, 0); }
+  22.2% { transform: skewX(-12.5deg) skewY(-12.5deg); }
+  33.3% { transform: skewX(6.25deg) skewY(6.25deg); }
+  44.4% { transform: skewX(-3.125deg) skewY(-3.125deg); }
+  55.5% { transform: skewX(1.5625deg) skewY(1.5625deg); }
+  66.6% { transform: skewX(-0.78125deg) skewY(-0.78125deg); }
+  77.7% { transform: skewX(0.390625deg) skewY(0.390625deg); }
+  88.8% { transform: skewX(-0.1953125deg) skewY(-0.1953125deg); }
+}
+.anim-jello { transform-origin: center; animation: animJello 1s ease; }
+
+/* 24. Rubber Band (Emphasis) */
+@keyframes animRubberBand {
+  from { transform: scale3d(1, 1, 1); }
+  30% { transform: scale3d(1.25, 0.75, 1); }
+  40% { transform: scale3d(0.75, 1.25, 1); }
+  50% { transform: scale3d(1.15, 0.85, 1); }
+  65% { transform: scale3d(0.95, 1.05, 1); }
+  75% { transform: scale3d(1.05, 0.95, 1); }
+  to { transform: scale3d(1, 1, 1); }
+}
+.anim-rubber-band { animation: animRubberBand 1s ease; }
+
+/* 25. Flash (Emphasis) */
+@keyframes animFlash {
+  from, 50%, to { opacity: 1; }
+  25%, 75% { opacity: 0; }
+}
+.anim-flash { animation: animFlash 1s ease; }
+
+/* 26. Fade Out (Exit) */
+@keyframes animFadeOut { from { opacity: 1; } to { opacity: 0; } }
+.anim-fade-out { animation: animFadeOut 0.7s ease forwards; }
+
+/* 27. Fade Out Down (Exit) */
+@keyframes animFadeOutDown { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(60px); } }
+.anim-fade-out-down { animation: animFadeOutDown 0.7s ease forwards; }
+
+/* 28. Zoom Out (Exit) */
+@keyframes animZoomOut { from { opacity: 1; transform: scale(1); } to { opacity: 0; transform: scale(0.3); } }
+.anim-zoom-out { animation: animZoomOut 0.7s ease forwards; }
+
+/* 29. Bounce Out (Exit) */
+@keyframes animBounceOut {
+  20% { transform: scale3d(0.9, 0.9, 0.9); }
+  50%, 55% { opacity: 1; transform: scale3d(1.1, 1.1, 1.1); }
+  to { opacity: 0; transform: scale3d(0.3, 0.3, 0.3); }
+}
+.anim-bounce-out { animation: animBounceOut 0.8s ease forwards; }
+
+/* 30. Flip Out X (Exit) */
+@keyframes animFlipOutX {
+  from { transform: perspective(400px); }
+  30% { transform: perspective(400px) rotate3d(1, 0, 0, -20deg); opacity: 1; }
+  to { transform: perspective(400px) rotate3d(1, 0, 0, 90deg); opacity: 0; }
+}
+.anim-flip-out-x { animation: animFlipOutX 0.75s ease forwards; }
+
+/* 31. Roll Out (Exit) */
+@keyframes animRollOut {
+  from { opacity: 1; transform: translateX(0) rotate(0); }
+  to { opacity: 0; transform: translateX(100%) rotate(120deg); }
+}
+.anim-roll-out { animation: animRollOut 0.8s ease forwards; }
+
+/* 32. Hinge Fall (Exit) */
+@keyframes animHinge {
+  0% { animation-timing-function: ease-in-out; }
+  20%, 60% { transform: rotate3d(0, 0, 1, 80deg); transform-origin: top left; animation-timing-function: ease-in-out; }
+  40%, 80% { transform: rotate3d(0, 0, 1, 60deg); transform-origin: top left; animation-timing-function: ease-in-out; opacity: 1; }
+  to { transform: translate3d(0, 700px, 0); opacity: 0; }
+}
+.anim-hinge { animation: animHinge 1.5s ease forwards; }
+
+
+/* =========================================================
+   15+ SLIDE TRANSITIONS (Full screen / Canvas level)
+   ========================================================= */
+
+/* 1. None */
+.trans-none { transition: none; }
+
+/* 2. Fade */
+@keyframes transFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.trans-fade { animation: transFade 0.6s ease; }
+
+/* 3. Push Left */
+@keyframes transPushLeft {
+  from { transform: translateX(100%); opacity: 0.5; }
+  to { transform: translateX(0); opacity: 1; }
+}
+.trans-push-left { animation: transPushLeft 0.55s cubic-bezier(0.2, 0.8, 0.2, 1); }
+
+/* 4. Push Right */
+@keyframes transPushRight {
+  from { transform: translateX(-100%); opacity: 0.5; }
+  to { transform: translateX(0); opacity: 1; }
+}
+.trans-push-right { animation: transPushRight 0.55s cubic-bezier(0.2, 0.8, 0.2, 1); }
+
+/* 5. Push Up */
+@keyframes transPushUp {
+  from { transform: translateY(100%); opacity: 0.5; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.trans-push-up { animation: transPushUp 0.55s cubic-bezier(0.2, 0.8, 0.2, 1); }
+
+/* 6. Push Down */
+@keyframes transPushDown {
+  from { transform: translateY(-100%); opacity: 0.5; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.trans-push-down { animation: transPushDown 0.55s cubic-bezier(0.2, 0.8, 0.2, 1); }
+
+/* 7. Wipe Left */
+@keyframes transWipeLeft {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+.trans-wipe-left { animation: transWipeLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+
+/* 8. Wipe Right */
+@keyframes transWipeRight {
+  from { clip-path: inset(0 0 0 100%); }
+  to { clip-path: inset(0 0 0 0); }
+}
+.trans-wipe-right { animation: transWipeRight 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+
+/* 9. Zoom In */
+@keyframes transZoomIn {
+  from { transform: scale(0.6); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+.trans-zoom-in { animation: transZoomIn 0.55s cubic-bezier(0.16, 1, 0.3, 1); }
+
+/* 10. Zoom Out */
+@keyframes transZoomOut {
+  from { transform: scale(1.4); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+.trans-zoom-out { animation: transZoomOut 0.55s cubic-bezier(0.16, 1, 0.3, 1); }
+
+/* 11. Flip 3D Horizontal */
+@keyframes transFlipH {
+  from { transform: perspective(1000px) rotateY(-90deg); opacity: 0; }
+  to { transform: perspective(1000px) rotateY(0); opacity: 1; }
+}
+.trans-flip-h { animation: transFlipH 0.65s ease-out; }
+
+/* 12. Flip 3D Vertical */
+@keyframes transFlipV {
+  from { transform: perspective(1000px) rotateX(90deg); opacity: 0; }
+  to { transform: perspective(1000px) rotateX(0); opacity: 1; }
+}
+.trans-flip-v { animation: transFlipV 0.65s ease-out; }
+
+/* 13. Circle Mask Reveal */
+@keyframes transCircleReveal {
+  from { clip-path: circle(0% at 50% 50%); }
+  to { clip-path: circle(100% at 50% 50%); }
+}
+.trans-circle-reveal { animation: transCircleReveal 0.7s cubic-bezier(0.4, 0, 0.2, 1); }
+
+/* 14. Diamond Mask */
+@keyframes transDiamond {
+  from { clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%); }
+  to { clip-path: polygon(50% -50%, 150% 50%, 50% 150%, -50% 50%); }
+}
+.trans-diamond { animation: transDiamond 0.75s cubic-bezier(0.4, 0, 0.2, 1); }
+
+/* 15. Split Horizontal */
+@keyframes transSplitH {
+  from { clip-path: inset(50% 0 50% 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+.trans-split-h { animation: transSplitH 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+
+/* 16. Split Vertical */
+@keyframes transSplitV {
+  from { clip-path: inset(0 50% 0 50%); }
+  to { clip-path: inset(0 0 0 0); }
+}
+.trans-split-v { animation: transSplitV 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+
+/* 17. Rotate & Zoom (Swirl) */
+@keyframes transSwirl {
+  from { transform: rotate(-45deg) scale(0.5); opacity: 0; }
+  to { transform: rotate(0deg) scale(1); opacity: 1; }
+}
+.trans-swirl { animation: transSwirl 0.65s cubic-bezier(0.16, 1, 0.3, 1); }

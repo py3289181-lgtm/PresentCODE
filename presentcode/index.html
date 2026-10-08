@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PresentCode - Professional Presentation Editor</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23d83b01'/><text x='7' y='23' font-size='20' font-weight='bold' fill='white'>P</text></svg>">
+  
+  <!-- Google Fonts Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+
+  <!-- ================= TOP HEADER BAR ================= -->
+  <header class="top-header">
+    <div class="brand-section">
+      <div class="brand-logo">
+        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+        <span>PresentCode</span>
+      </div>
+      <input type="text" id="presentationTitle" class="presentation-title-input" value="PresentCode Presentation" title="Click to rename presentation">
+    </div>
+
+    <div class="header-actions">
+      <button class="header-btn" onclick="window.savePresentationFile()" title="Save as .present file (Ctrl+S)">
+        💾 Save
+      </button>
+      <button class="header-btn" onclick="document.getElementById('fileInputLoad').click()" title="Open .present file">
+        📂 Open
+      </button>
+      <button class="header-btn" onclick="window.exportStandaloneHTML()" title="Export complete standalone presentation HTML">
+        🌐 Export HTML
+      </button>
+      <button class="header-btn" onclick="window.printSlidesToPdf()" title="Print / Save to PDF">
+        🖨️ PDF
+      </button>
+      <button class="header-btn btn-play" onclick="window.startPresentation(true)" title="Start Slideshow from Beginning (F5)">
+        ▶️ Present
+      </button>
+    </div>
+  </header>
+
+  <!-- ================= RIBBON TABS ================= -->
+  <nav class="ribbon-tabs-bar">
+    <button class="ribbon-tab" data-tab="file">File</button>
+    <button class="ribbon-tab active" data-tab="home">Home</button>
+    <button class="ribbon-tab" data-tab="insert">Insert</button>
+    <button class="ribbon-tab" data-tab="slides">Slides</button>
+    <button class="ribbon-tab" data-tab="draw">Draw</button>
+    <button class="ribbon-tab" data-tab="design">Design</button>
+    <button class="ribbon-tab" data-tab="transitions">Transitions</button>
+    <button class="ribbon-tab" data-tab="animations">Animations</button>
+    <button class="ribbon-tab" data-tab="slideshow">Slide Show</button>
+    <button class="ribbon-tab" data-tab="view">View</button>
+  </nav>
+
+  <!-- ================= RIBBON CONTENT PANELS ================= -->
+  <div class="ribbon-content">
+    
+    <!-- HOME PANEL -->
+    <div id="ribbonPanel_home" class="ribbon-panel" style="display:flex; gap:16px; align-items:center;">
+      <!-- Slide Ops -->
+      <div class="ribbon-group">
+        <div class="ribbon-group-tools">
+          <button class="tool-btn" onclick="window.deck.addSlide()" title="New Slide (Ctrl+M)">
+            ➕ <b>New Slide</b>
+          </button>
+          <button class="tool-btn" onclick="window.deck.duplicateCurrentSlide()" title="Duplicate (Ctrl+D)">
+            📑 Duplicate
+          </button>
+        </div>
+        <div class="ribbon-group-title">Slides</div>
+      </div>
+
+      <!-- 50+ Fonts & Formatting -->
+      <div class="ribbon-group">
+        <div class="ribbon-group-tools" style="display:grid; grid-template-columns:auto auto auto auto auto; gap:4px;">
+          <!-- Font Select (50+ Fonts) -->
+          <select id="fontFamilySelect" class="tool-select" style="width:160px;" title="Choose from 50+ Google Fonts"></select>
+          
+          <!-- Font Size -->
+          <div style="display:flex; align-items:center; gap:2px;">
+            <input type="number" id="fontSizeInput" value="28" min="8" max="160" class="tool-select" style="width:58px;" onchange="window.changeFontSize(this.value - parseInt(window.deck.getCurrentSlide().elements[0]?.styles?.fontSize||24))">
+            <button class="tool-btn" onclick="window.changeFontSize(2)" title="Increase Font Size">A▲</button>
+            <button class="tool-btn" onclick="window.changeFontSize(-2)" title="Decrease Font Size">A▼</button>
+          </div>
+
+          <!-- Bold, Italic, Underline -->
+          <div style="display:flex; gap:2px;">
+            <button class="tool-btn" onclick="window.toggleBold()" title="Bold (Ctrl+B)"><b>B</b></button>
+            <button class="tool-btn" onclick="window.toggleItalic()" title="Italic (Ctrl+I)"><i>I</i></button>
+            <button class="tool-btn" onclick="window.toggleUnderline()" title="Underline (Ctrl+U)"><u>U</u></button>
+          </div>
+
+          <!-- Text Color & Background -->
+          <div style="display:flex; align-items:center; gap:6px;">
+            <label title="Text Color" style="display:flex; align-items:center; cursor:pointer; font-size:12px;">
+              <span style="font-weight:bold; text-decoration:underline red;">A</span>
+              <input type="color" id="textColorInput" value="#242424" style="width:24px; height:24px; border:none; cursor:pointer;" onchange="window.setTextColor(this.value)">
+            </label>
+            <label title="Highlight Color" style="display:flex; align-items:center; cursor:pointer; font-size:12px;">
+              🎨
+              <input type="color" id="textBgColorInput" value="#ffffff" style="width:24px; height:24px; border:none; cursor:pointer;" onchange="window.setTextBgColor(this.value)">
+            </label>
+          </div>
+
+          <!-- Alignment -->
+          <div style="display:flex; gap:2px;">
+            <button class="tool-btn" onclick="window.setTextAlign('left')" title="Align Left">⇤</button>
+            <button class="tool-btn" onclick="window.setTextAlign('center')" title="Align Center">⇥⇤</button>
+            <button class="tool-btn" onclick="window.setTextAlign('right')" title="Align Right">⇥</button>
+          </div>
+        </div>
+        <div class="ribbon-group-title">Font & Typography (50+ Fonts)</div>
+      </div>
+
+      <!-- Quick Elements -->
+      <div class="ribbon-group">
+        <div class="ribbon-group-tools">
+          <button class="tool-btn" onclick="window.addTextBox()">🔤 Text Box</button>
+          <button class="tool-btn" onclick="window.addShape('rectangle')">▭ Box</button>
+          <button class="tool-btn" onclick="window.addShape('circle')">◯ Circle</button>
+          <button class="tool-btn" onclick="document.getElementById('imgFileInput').click()">🖼️ Image</button>
+        </div>
+        <div class="ribbon-group-title">Insert Items</div>
+      </div>
+
+      <!-- Delete Element -->
+      <div class="ribbon-group">
+        <div class="ribbon-group-tools">
+          <button class="tool-btn" onclick="window.deleteSelectedElement()" style="color:#d83b01;" title="Delete Selected (Del)">
+            🗑️ Delete
+          </button>
+        </div>
+        <div class="ribbon-group-title">Editing</div>
+      </div>
+    </div>
+
+    <!-- INSERT PANEL -->
+    <div id="ribbonPanel_insert" class="ribbon-panel" style="display:none; gap:16px; align-items:center;">
+      <div class="ribbon-group">
+        <div class="ribbon-group-tools">
+          <button class="tool-btn" onclick="window.addTextBox()">🔤 Text Box</button>
+        </div>
+        <div class="ribbon-group-title">Text</div>
+      </div>
+      <div class="ribbon-group">
+        <div class="ribbon-group-tools">
+          <button class="tool-btn" onclick="window.addShape('rectangle')">▭ Rectangle</button>
+          <button class="tool-btn" onclick="window.addShape('rounded')">▢ Rounded</button>
+          <button class="tool-btn" onclick="window.addShape('circle')">◯ Circle</button>
+          <button class="tool-btn" onclick="window.addShape('triangle')">△ Triangle</button>
+          <button class="tool-btn" onclick="window.addShape('star')">★ Star</button>
+          <button class="tool-btn" onclick="window.addShape('arrow')">➜ Arrow</button>
+        </div>
+        <div class="ribbon-group-title">Shapes</div>
+      </div>
+      <div class="ribbon-group">
+        <div class="ribbon-group-tools">
+          <button class="tool-btn" onclick="document.getElementById('imgFileInput').click()">📁 From Computer</button>
+          <button class="tool-btn" onclick="window.addImageFromUrl()">🌐 From URL</button>
+        </div>
+        <div class="ribbon-group-title">Images</div>
+      </div>
+    </div>
+
+    <!-- SLIDES PANEL -->
+    <div id="ribbonPanel_slides" class="ribbon-panel" style="display:none; gap:16px; align-items:center;">
+      <div class="ribbon-group">
+        <div class="ribbon-group-tools">
+          <button class="tool-btn" onclick="window.deck.addSlide('title-content')">➕ Blank Content</button>
+          <button class="tool-btn" onclick="window.deck.duplicateCurrentSlide()">📑 Duplicate Slide</button>
+          <button class="tool-btn" onclick="window.deck.deleteCurrentSlide()" style="color:#d83b01;">🗑️ Delete Slide</button>
+        </div>
+        <div class="ribbon-group-title">Slide Actions</div>
+      </div>
+      <div class="ribbon-group">
+        <div class="ribbon-group-tools">
+          <button class="tool-btn" onclick="window.deck.moveSlide(-1)">▲ Move Up</button>
+          <button class="tool-btn" onclick="window.deck.moveSlide(1)">▼ Move Down</button>
+        </div>
+        <div class="ribbon-group-title">Slide Order</div>
+      </div>
+    </div>
+
+    <!-- DRAW PANEL -->
+    <div id="ribbonPanel_draw" class="ribbon-panel" style="display:none; gap:16px; align-items:center;">
+      <div class="ribbon-group">
+        <div class="ribbon-group-tools">
+          <button class="tool-btn active" id="btnToolPen" onclick="window.toggleDrawingMode(true, 'pen')">✏️ Pen</button>
+          <button class="tool-btn" id="btnToolHighlighter" onclick="window.toggleDrawingMode(true, 'highlighter')">🖍️ Highlighter</button>
+          <button class="tool-btn" id="btnToolEraser" onclick="window.toggleDrawingMode(true, 'eraser')">🧹 Eraser</button>
+          <button class="tool-btn" onclick="window.toggleDrawingMode(false)">👆 Select Mode</button>
+        </div>
+        <div class="ribbon-group-title">Drawing Tools</div>
+      </div>
+      <div class="ribbon-group">
+        <div class="ribbon-group-tools">
+          <label style="display:flex; align-items:center; gap:6px; font-size:12px;">
+            Color:
+            <input type="color" value="#d83b01" style="width:28px; height:28px; border:none; cursor:pointer;" onchange="window.setDrawColor(this.value)">
+          </label>
+          <label style="display:flex; align-items:center; gap:6px; font-size:12px;">
+            Size:
+            <input type="range" min="1" max="25" value="3" style="width:80px;" oninput="window.setDrawSize(this.value)">
+          </label>
+        </div>
+        <div class="ribbon-group-title">Brush Style</div>
+      </div>
+      <div class="ribbon-group">
+        <div class="ribbon-group-tools">
+          <button class="tool-btn" onclick="window.clearSlideDrawings()">🗑️ Clear Drawings</button>
+        </div>
+        <div class="ribbon-group-title">Erase All</div>
+      </div>
+    </div>
+
+    <!-- DESIGN PANEL -->
+    <div id="ribbonPanel_design" class="ribbon-panel" style="display:none; gap:16px; align-items:center;">
+      <div class="ribbon-group">
+        <div class="ribbon-group-tools">
+          <button class="tool-btn" onclick="window.setSlideBackground('#ffffff')" style="border-left:4px solid #fff;">White</button>
+          <button class="tool-btn" onclick="window.setSlideBackground('#1e1e1e');" style="border-left:4px solid #1e1e1e;">Dark Modern</button>
+          <button class="tool-btn" onclick="window.setSlideBackground('linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)')" style="border-left:4px solid #667eea;">Soft Gradient</button>
+          <button class="tool-btn" onclick="window.setSlideBackground('linear-gradient(135deg, #1f1c2c 0%, #928dab 100%)')" style="border-left:4px solid #928dab;">Midnight</button>
+          <button class="tool-btn" onclick="window.setSlideBackground('linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%)')" style="border-left:4px solid #ff758c;">Sunset Glow</button>
+        </div>
+        <div class="ribbon-group-title">Presets & Themes</div>
+      </div>
+      <div class="ribbon-group">
+        <div class="ribbon-group-tools">
+          <label style="display:flex; align-items:center; gap:6px; font-size:13px; cursor:pointer;">
+            Custom Background:
+            <input type="color" value="#ffffff" style="width:30px; height:28px; border:none; cursor:pointer;" onchange="window.setSlideBackground(this.value)">
+          </label>
+        </div>
+        <div class="ribbon-group-title">Color Picker</div>
+      </div>
+    </div>
+
+    <!-- TRANSITIONS PANEL (15+ Transitions) -->
+    <div id="ribbonPanel_transitions" class="ribbon-panel" style="display:none; gap:16px; align-items:center;">
+      <div class="ribbon-group">
+        <div class="ribbon-group-tools">
+          <label style="font-size:12px; font-weight:600; color:var(--text-secondary);">Select Transition:</label>
+          <select id="slideTransitionSelect" class="tool-select" style="width:240px; font-weight:600; color:var(--brand-red);" title="15+ Slide Transitions"></select>
+        </div>
+        <div class="ribbon-group-title">15+ Slide Transitions</div>
+      </div>
+      <div class="ribbon-group">
+        <div class="ribbon-group-tools">
+          <button class="tool-btn" onclick="document.getElementById('slideTransitionSelect').dispatchEvent(new Event('change'))">
+            ▶️ Preview Transition
+          </button>
+        </div>
+        <div class="ribbon-group-title">Preview</div>
+      </div>
+    </div>
+
+    <!-- ANIMATIONS PANEL (30+ Animations) -->
+    <div id="ribbonPanel_animations" class="ribbon-panel" style="display:none; gap:16px; align-items:center;">
+      <div class="ribbon-group">
+        <div class="ribbon-group-tools">
+          <label style="font-size:12px; font-weight:600; color:var(--text-secondary);">Select Animation:</label>
+          <select id="elementAnimSelect" class="tool-select" style="width:260px; font-weight:600; color:var(--brand-red);" title="30+ Element Animations"></select>
+        </div>
+        <div class="ribbon-group-title">30+ Animations (Entrance, Emphasis, Exit)</div>
+      </div>
+      <div class="ribbon-group">
+        <div class="ribbon-group-tools">
+          <button class="tool-btn" onclick="document.getElementById('elementAnimSelect').dispatchEvent(new Event('change'))">
+            ▶️ Play Animation
+          </button>
+        </div>
+        <div class="ribbon-group-title">Preview</div>
+      </div>
+    </div>
+
+    <!-- SLIDE SHOW PANEL -->
+    <div id="ribbonPanel_slideshow" class="ribbon-panel" style="display:none; gap:16px; align-items:center;">
+      <div class="ribbon-group">
+        <div class="ribbon-group-tools">
+          <button class="tool-btn" onclick="window.startPresentation(true)">
+            ▶️ From Beginning (F5)
+          </button>
+          <button class="tool-btn" onclick="window.startPresentation(false)">
+            ⏭️ From Current Slide
+          </button>
+        </div>
+        <div class="ribbon-group-title">Start Slide Show</div>
+      </div>
+      <div class="ribbon-group">
+        <div class="ribbon-group-tools">
+          <button class="tool-btn" onclick="window.toggleLaserPointer()">
+            🔴 Laser Pointer (L)
+          </button>
+        </div>
+        <div class="ribbon-group-title">Presenter Tools</div>
+      </div>
+    </div>
+
+    <!-- FILE PANEL -->
+    <div id="ribbonPanel_file" class="ribbon-panel" style="display:none; gap:16px; align-items:center;">
+      <div class="ribbon-group">
+        <div class="ribbon-group-tools">
+          <button class="tool-btn" onclick="window.savePresentationFile()">💾 Save .present File</button>
+          <button class="tool-btn" onclick="document.getElementById('fileInputLoad').click()">📂 Open .present File</button>
+          <button class="tool-btn" onclick="window.exportStandaloneHTML()">🌐 Export Standalone HTML</button>
+          <button class="tool-btn" onclick="window.printSlidesToPdf()">🖨️ Print / Save to PDF</button>
+        </div>
+        <div class="ribbon-group-title">File Operations</div>
+      </div>
+    </div>
+
+    <!-- VIEW PANEL -->
+    <div id="ribbonPanel_view" class="ribbon-panel" style="display:none; gap:16px; align-items:center;">
+      <div class="ribbon-group">
+        <div class="ribbon-group-tools">
+          <button class="tool-btn" onclick="document.getElementById('slideViewport').style.transform = 'scale(1)'">100% Fit</button>
+          <button class="tool-btn" onclick="document.getElementById('slideViewport').style.transform = 'scale(1.2)'">Zoom In (120%)</button>
+          <button class="tool-btn" onclick="document.getElementById('slideViewport').style.transform = 'scale(0.8)'">Zoom Out (80%)</button>
+        </div>
+        <div class="ribbon-group-title">Zoom</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ================= MAIN BODY ================= -->
+  <main class="app-body">
+    
+    <!-- LEFT RED QUICK TOOLBAR (Matching user's sketch) -->
+    <aside class="left-quick-bar">
+      <button id="btnQuickNewSlide" class="quick-icon-btn" title="Add New Slide">+</button>
+      <button id="btnQuickAddText" class="quick-icon-btn" title="Add Text Box">🔤</button>
+      <button id="btnQuickAddShape" class="quick-icon-btn" title="Add Shape">▭</button>
+      <button id="btnQuickDraw" class="quick-icon-btn" title="Drawing Pen">✏️</button>
+      <button id="btnQuickPresent" class="quick-icon-btn" title="Present Slideshow (F5)">▶</button>
+    </aside>
+
+    <!-- CENTER CANVAS WORKSPACE -->
+    <section class="workspace-container">
+      <div id="slideViewport" class="slide-viewport">
+        <!-- Interactive Drawing Canvas Overlay -->
+        <canvas id="drawingCanvas" class="drawing-canvas"></canvas>
+      </div>
+    </section>
+
+    <!-- RIGHT SLIDE THUMBNAILS PANEL (Matching user's sketch) -->
+    <aside class="right-slides-panel">
+      <div class="panel-header">
+        <span>Slides</span>
+        <button onclick="window.deck.addSlide()" style="background:none; border:none; cursor:pointer; font-size:16px; font-weight:bold; color:var(--brand-red);">+</button>
+      </div>
+      <div id="slidesListContainer" class="slides-list">
+        <!-- Dynamically rendered slide thumbnails -->
+      </div>
+      <button class="panel-footer-btn" onclick="window.deck.addSlide()">
+        <span>+</span> Add Slide
+      </button>
+    </aside>
+
+  </main>
+
+  <!-- ================= BOTTOM STATUS BAR ================= -->
+  <footer class="bottom-status-bar">
+    <div class="status-left">
+      <span id="statusSlideCounter">Slide 1 of 1</span>
+      <span>16:9 Widescreen</span>
+    </div>
+    <div class="status-right">
+      <span>Fit to window</span>
+      <span style="font-weight:600; letter-spacing:0.5px;">⚡ PresentCode</span>
+    </div>
+  </footer>
+
+  <!-- ================= PRESENTATION OVERLAY ================= -->
+  <div id="presentationOverlay" class="presentation-overlay">
+    <div id="presentationStage" class="presentation-stage"></div>
+    <div class="present-nav-controls">
+      <button class="present-ctrl-btn" onclick="window.presentPrev()" title="Previous Slide (Left Arrow)">❮</button>
+      <span id="presentCounter">1 / 1</span>
+      <button class="present-ctrl-btn" onclick="window.presentNext()" title="Next Slide (Right Arrow / Space)">❯</button>
+      <button id="btnPresentLaser" class="present-ctrl-btn" onclick="window.toggleLaserPointer()" title="Laser Pointer (L)">🔴</button>
+      <button class="present-ctrl-btn" onclick="window.exitPresentation()" title="Exit (Esc)">✕</button>
+    </div>
+    <div id="laserPointer" class="laser-pointer"></div>
+  </div>
+
+  <!-- Hidden File Pickers -->
+  <input type="file" id="fileInputLoad" accept=".present,.json" style="display:none;" onchange="window.loadPresentationFile(this.files[0])">
+  <input type="file" id="imgFileInput" accept="image/*" style="display:none;" onchange="window.handleImageUpload(this.files[0])">
+
+  <!-- Scripts (Pure Vanilla JavaScript, Zero Build Steps) -->
+  <script src="js/fonts.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/slides.js"></script>
+  <script src="js/canvas.js"></script>
+  <script src="js/present.js"></script>
+  <script src="js/export.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
